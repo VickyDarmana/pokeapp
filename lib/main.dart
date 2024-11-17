@@ -29,14 +29,14 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white, // Set background menjadi putih
+        color: Colors.white, // Set background to white
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () {
-                  // Navigasi ke halaman LoginPage saat gambar ditekan
+                  // Navigate to LoginPage
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -49,7 +49,6 @@ class StartPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              // Hapus tombol jika tidak dibutuhkan lagi
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(

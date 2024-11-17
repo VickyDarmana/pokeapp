@@ -14,7 +14,7 @@ class _ShowCardsPageState extends State<ShowCardsPage> {
   String resultMessage = "";
 
   Future<void> fetchPokemonCards() async {
-    final String apiUrl = 'http://192.168.100.6/PokemonAPI/cards.php';
+    final String apiUrl = 'http://192.168.100.4/PokemonAPI/cards.php';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -37,7 +37,7 @@ class _ShowCardsPageState extends State<ShowCardsPage> {
   }
 
   Future<void> deleteCard(int id) async {
-    final String apiUrl = 'http://192.168.100.6/PokemonAPI/cards.php?id=$id';
+    final String apiUrl = 'http://192.168.100.4/PokemonAPI/cards.php?id=$id';
     try {
       final response = await http.delete(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -59,7 +59,7 @@ class _ShowCardsPageState extends State<ShowCardsPage> {
   }
 
   Future<void> updateCard(int id, Map<String, dynamic> updatedData) async {
-    final String apiUrl = 'http://192.168.100.6/PokemonAPI/cards.php?id=$id';
+    final String apiUrl = 'http://192.168.100.4/PokemonAPI/cards.php?id=$id';
     try {
       final response = await http.put(
         Uri.parse(apiUrl),

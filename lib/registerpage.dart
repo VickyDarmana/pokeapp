@@ -16,9 +16,25 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
 
   String hasilResponse = "";
+  bool isLoading = false; // Flag to manage loading state
 
   Future<void> registerUser() async {
-    final String apiUrl = 'http://192.168.100.6/PokemonAPI/profiles.php';
+    final String apiUrl =
+        'http://192.168.100.4/PokemonAPI/profiles.php'; // Update with your IP address if needed
+
+    if (emailController.text.isEmpty ||
+        nameController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    // Show loading indicator
+    setState(() {
+      isLoading = true;
+    });
 
     Map<String, dynamic> userData = {
       'email': emailController.text,
@@ -27,11 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
     };
 
     try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {"Content-Type": "application/json"},
-        body: json.encode(userData),
-      );
+      final response = await http
+          .post(
+            Uri.parse(apiUrl),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode(userData),
+          )
+          .timeout(const Duration(seconds: 10)); // Timeout for 10 seconds
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
@@ -68,6 +86,11 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
+    } finally {
+      // Hide loading indicator
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -106,10 +129,14 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () async {
-              await registerUser();
-            },
-            child: const Text("REGISTER"),
+            onPressed: isLoading
+                ? null
+                : () async {
+                    await registerUser();
+                  },
+            child: isLoading
+                ? const CircularProgressIndicator() // Show loading spinner
+                : const Text('Register'),
           ),
           const SizedBox(height: 20),
           Text(hasilResponse),

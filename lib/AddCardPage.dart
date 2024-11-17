@@ -20,7 +20,7 @@ class _AddCardPageState extends State<AddCardPage> {
   String resultMessage = "";
 
   Future<void> addPokemonCard() async {
-    final String apiUrl = 'http://192.168.100.6/PokemonAPI/cards.php';
+    final String apiUrl = 'http://192.168.100.4/PokemonAPI/cards.php';
 
     Map<String, dynamic> cardData = {
       'name': nameController.text,
