@@ -21,6 +21,36 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+@override
+  State<HomePage> createState() => _HomePageState();
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Drawer'),
+        ),
+        drawer: Drawer(
+            child: Column(
+          children: [
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                "  Menu",
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                // Route menu ke halaman utama
+                print("YES");
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
