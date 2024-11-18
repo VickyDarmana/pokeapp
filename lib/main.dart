@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.bottomLeft,
               child: Text(
-                "  Menu",
+                "Menu",
                 style: TextStyle(fontSize: 25),
               ),
             ),
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.home),
               title: Text("Home"),
               onTap: () {
-                // Route menu ke halaman utama
+
                 print("YES");
               },
             ),
